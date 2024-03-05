@@ -13,7 +13,6 @@ class Landscreen extends StatefulWidget {
 }
 
 class _LandscreenState extends State<Landscreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class _LandscreenState extends State<Landscreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Addtask()),
+              MaterialPageRoute(builder: (context) => const Addtask()),
             );
           },
           child: const FaIcon(
@@ -40,180 +39,226 @@ class _LandscreenState extends State<Landscreen> {
           backgroundColor: const Color.fromARGB(255, 8, 63, 108),
           child: Container(
             padding: const EdgeInsets.all(15.0),
-            child: ListView(
-              children: [
-                const ListTile(
-                  title: Text(
-                    'name',
-                    style: TextStyle(color: Colors.white, fontSize: 50),
+            child: Consumer<Model>(builder: (context, model, child) {
+              return ListView(
+                children: [
+                  ListTile(
+                    title: Text(
+                      model.lastname,
+                      style: const TextStyle(color: Colors.white, fontSize: 40),
+                    ),
+                    subtitle: Text(
+                      model.lastemail,
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
+                    ),
                   ),
-                  subtitle: Text(
-                    'email',
-                    style: TextStyle(color: Colors.white, fontSize: 50),
+                  const SizedBox(
+                    height: 50,
                   ),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ListTile(
-                        leading: const Icon(
-                          Icons.bookmark,
-                          color: Colors.white,
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ListTile(
+                          leading: const Icon(
+                            Icons.bookmark,
+                            color: Colors.white,
+                          ),
+                          title: const Text(
+                            'Templates',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onTap: () {},
                         ),
-                        title: const Text(
-                          'Templates',
-                          style: TextStyle(color: Colors.white),
+                        ListTile(
+                          leading: const Icon(
+                            Icons.category,
+                            color: Colors.white,
+                          ),
+                          title: const Text('Categories',
+                              style: TextStyle(color: Colors.white)),
+                          onTap: () {},
                         ),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(
-                          Icons.category,
-                          color: Colors.white,
+                        ListTile(
+                          leading: const Icon(
+                            Icons.analytics,
+                            color: Colors.white,
+                          ),
+                          title: const Text('Analytics',
+                              style: TextStyle(color: Colors.white)),
+                          onTap: () {},
                         ),
-                        title: const Text('Categories',
-                            style: TextStyle(color: Colors.white)),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(
-                          Icons.analytics,
-                          color: Colors.white,
+                        ListTile(
+                          leading: const Icon(
+                            Icons.settings,
+                            color: Colors.white,
+                          ),
+                          title: const Text('Settings',
+                              style: TextStyle(color: Colors.white)),
+                          onTap: () {},
                         ),
-                        title: const Text('Analytics',
-                            style: TextStyle(color: Colors.white)),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(
-                          Icons.settings,
-                          color: Colors.white,
-                        ),
-                        title: const Text('Settings',
-                            style: TextStyle(color: Colors.white)),
-                        onTap: () {},
-                      ),
-                    ]),
-                const SizedBox(
-                  height: 200,
-                ),
-                const Text(
-                  'Thank you \nSero Studio',
-                  style: TextStyle(
-                      color: Colors.white, fontSize: 25, fontFamily: 'roboto'),
-                )
-              ],
-            ),
+                      ]),
+                  const SizedBox(
+                    height: 200,
+                  ),
+                  const Text(
+                    'Thank you \nSero Studio',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontFamily: 'roboto'),
+                  )
+                ],
+              );
+            }),
           ),
         ),
         body: DecoratedBox(
-          decoration: const BoxDecoration(color: Color(0xFFF8FAFF)),
-          child: SafeArea(
-                           child:  Consumer<Model>(builder: (context, model, child) {
-
-            return Padding(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                children: [
-                  const Text('What is up, name!'),
-                  const Text('catagories'),
-                  Expanded(
-                    flex: 2,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: model.catagoriecardlist.length,
-                        itemBuilder: (context, i) {
-                          return Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              side: BorderSide(
-                                  color: model.catagoriecardlist[i]['color']),
-                            ),
-                            color: Colors.white,
-                            elevation: 0,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 15, right: 80),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '${model.catagoriecardlist[i]['numtasks']} tasks',
-                                    style: const TextStyle(
-                                        color: Color.fromARGB(255, 62, 62, 62),
-                                        fontSize: 12,
-                                        fontFamily: 'roboto'),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  const SizedBox(
-                                    height: 4,
-                                  ),
-                                  Text(
-                                    '${model.catagoriecardlist[i]['catname']}',
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontFamily: 'roboto'),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        }),
-                  ),
-                  const Text('Tasks of Today'),
-                  Expanded(
-                    flex: 10,
-                    child: ListView.builder(
-                      itemCount: model.todaytaskslist.length,
-                      itemBuilder: (context, i) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            side: BorderSide(color: model.todaytaskslist[i]['color']),
-                          ),
-                          color: Colors.white,
-                          elevation: 0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              children: [
-                                Checkboxcustom(model.todaytaskslist[i]['taskstate']),
-                                Expanded(
-                                  child: Text(
-                                    '${model.todaytaskslist[i]['taskname']}',
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontFamily: 'roboto'),
+            decoration: const BoxDecoration(color: Color(0xFFF8FAFF)),
+            child: SafeArea(
+              child: Consumer<Model>(builder: (context, model, child) {
+                return Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'What is up, ${model.lastname}!',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        'CATEGORIES',
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 101, 101, 101)),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: model.catagoriecardlist.length,
+                            itemBuilder: (context, i) {
+                              return Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  side: BorderSide(
+                                      color: model.catagoriecardlist[i]
+                                          ['color']),
+                                ),
+                                color: Colors.white,
+                                elevation: 0,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15, right: 80),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '${model.catagoriecardlist[i]['numtasks']} tasks',
+                                        style: const TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 62, 62, 62),
+                                            fontSize: 12,
+                                            fontFamily: 'roboto'),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                      const SizedBox(
+                                        height: 4,
+                                      ),
+                                      Text(
+                                        '${model.catagoriecardlist[i]['catname']}',
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontFamily: 'roboto'),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () {
-                                      setState(() {
-                                        model.todaytaskslist.removeAt(i);
-                                      });
-                                    })
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  )
-                ],
-              ),
-            );
-  }),
-        )));
+                              );
+                            }),
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      const Text(
+                        'TASKS OF TODAY',
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 101, 101, 101)),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Expanded(
+                        flex: 10,
+                        child: ListView.builder(
+                          itemCount: model.todaytaskslist.length,
+                          itemBuilder: (context, i) {
+                           
+                            String today = DateTime.now()
+                                .toIso8601String()
+                                .substring(0, 10);
+                            
+                            if (model.todaytaskslist[i]['date'] == today) {
+                              return Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  side: BorderSide(
+                                      color: model.todaytaskslist[i]['color']),
+                                ),
+                                color: Colors.white,
+                                elevation: 0,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
+                                    children: [
+                                      Checkboxcustom(
+                                          model.todaytaskslist[i]['taskstate']),
+                                      Expanded(
+                                        child: Text(
+                                          '${model.todaytaskslist[i]['taskname']}',
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 18,
+                                              fontFamily: 'roboto'),
+                                        ),
+                                      ),
+                                      IconButton(
+                                          icon: const Icon(Icons.delete),
+                                          onPressed: () {
+                                            setState(() {
+                                              model.todaytaskslist.removeAt(i);
+                                              model.updateTaskCounts();
+                                            });
+                                          })
+                                    ],
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return Container(); 
+                            }
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }),
+            )));
   }
 }
 

@@ -70,7 +70,7 @@ class _LoginState extends State<Login> {
                             height: 30,
                           ),
                           const Text(
-                            'Socialize',
+                            'SeroDo',
                             style: TextStyle(
                                 color: Colors.white,
                                 decoration: TextDecoration.none,

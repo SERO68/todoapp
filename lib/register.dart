@@ -8,10 +8,11 @@ import 'login.dart';
 
 class Register extends StatelessWidget {
   Register({super.key});
+
   final GlobalKey<FormState> name = GlobalKey();
   final TextEditingController emailregister = TextEditingController();
- final  TextEditingController passwordregister = TextEditingController();
-final  TextEditingController nameregister = TextEditingController();
+  final TextEditingController passwordregister = TextEditingController();
+  final TextEditingController nameregister = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,8 @@ final  TextEditingController nameregister = TextEditingController();
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const Login()),
+                              MaterialPageRoute(
+                                  builder: (context) => const Login()),
                             );
                           },
                           child: const Row(
@@ -57,7 +59,7 @@ final  TextEditingController nameregister = TextEditingController();
                         height: 30,
                       ),
                       const Text(
-                        'Socialize',
+                        'SeroDo',
                         style: TextStyle(
                             color: Colors.white,
                             decoration: TextDecoration.none,
@@ -71,7 +73,7 @@ final  TextEditingController nameregister = TextEditingController();
             Expanded(
               flex: 3,
               child: Consumer<Model>(builder: (context, model, child) {
-               return Container(
+                return Container(
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -167,7 +169,8 @@ final  TextEditingController nameregister = TextEditingController();
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                    TextFormField(controller: passwordregister,
+                                    TextFormField(
+                                      controller: passwordregister,
                                       obscureText: true,
                                       decoration: InputDecoration(
                                           errorMaxLines: 2,
@@ -232,12 +235,13 @@ final  TextEditingController nameregister = TextEditingController();
                                                     Colors.transparent)),
                                         onPressed: () {
                                           if (name.currentState!.validate()) {
-                                            model.adduser(emailregister, passwordregister,nameregister);
+                                            model.adduser(emailregister,
+                                                passwordregister, nameregister);
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                       Landscreen()),
+                                                      Landscreen()),
                                             );
                                           }
                                         },
@@ -316,7 +320,7 @@ final  TextEditingController nameregister = TextEditingController();
                                                 RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          5.0), // Adjust the radius here
+                                                          5.0),
                                                 ),
                                               ),
                                             ),
